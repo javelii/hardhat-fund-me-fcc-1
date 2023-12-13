@@ -30,7 +30,7 @@ contract FundMe {
     modifier onlyOwner() {
         // require(msg.sender == i_owner);
         if (msg.sender != i_owner) revert FundMe__NotOwner();
-        _;
+        _
     }
 
     // Functions Order:
@@ -74,7 +74,7 @@ contract FundMe {
         (bool success, ) = i_owner.call{value: address(this).balance}("");
         require(success);
     }
-
+    // creating a memory array to save gas.
     function cheaperWithdraw() public onlyOwner {
         address[] memory funders = s_funders;
         // mappings can't be in memory, sorry!
